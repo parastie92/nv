@@ -1,7 +1,7 @@
 CXX = g++
 
-LDFLAGS = -g -fdiagnostics-color -Wl,--wrap=malloc -Wl,--wrap=free 
-CXXFLAGS = -g -c -fdiagnostics-color -DLINKTIME
+LDFLAGS = -g -Wl,--wrap=malloc -Wl,--wrap=free 
+CXXFLAGS = -g -c -DLINKTIME
 
 all : main nvdimm.o main.o
 

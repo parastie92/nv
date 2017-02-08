@@ -22,6 +22,24 @@ class Nvdimm {
 // nv_read
 template <typename T>	
 T& Nvdimm<T>::operator[](int idx) {
+	node *p = list->head;
+
+	while(p != NULL) {
+		if(p->data.location == (void*)ptr)
+			break;
+		p = p->next;
+	}
+
+	if(p == NULL) {
+		printf("p error\n");
+		exit(1);
+	}
+
+	if(p->data.valid == 0) {
+		printf("nv_read error!(segmentation fault!)\n");
+//		exit(2);
+	}
+
 	return ptr[idx];
 }
 
@@ -46,8 +64,7 @@ Nvdimm<T>& Nvdimm<T>::operator=(T data) {
 	// valid2 = only malloc
 	// valid1 = already write
 	if(p->data.valid == 2) {
-		tptr = (T*)p->data.location;
-		*tptr = data;
+		*ptr = data;
 		p->data.valid = 1;
 	} else if(p->data.valid == 1) {
 		p->data.valid = 0;
@@ -58,12 +75,11 @@ Nvdimm<T>& Nvdimm<T>::operator=(T data) {
 		p->data.location = temp_ptr;
 		ptr = (T*)temp_ptr;
 
-		tptr = (T*)p->data.location;
-		*tptr = data;
+		*ptr = data;
 		p->data.valid = 1;
 	} else {
-		printf("nv_write error!\n");
-		exit(1);
+		printf("nv_write error!(segmentation fault!)\n");
+		exit(2);
 	}
 
 	printf("write location \t\t: %p\n", p->data.location);

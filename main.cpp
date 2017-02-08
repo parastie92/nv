@@ -31,6 +31,9 @@ int main() {
 	printf("nv1 val :\t%c\n", nv1[0]);
 	printNodes();
 
+	free(nv1.ptr);
+	printNodes();
+
 /*case 2*/
 	printf("\n-----------------------case2------------------------\n\n");
 	Nvdimm<int> nv3;
@@ -58,10 +61,6 @@ int main() {
 	printf("nv5 val :\t%s\n", nv5[0]);
 	printNodes();
 	
-	free(nv1.ptr);
-	free(nv2.ptr);
-	free(nv3.ptr);
-	free(nv4.ptr);
 	free(nv5.ptr);
 	printNodes();
 
@@ -72,6 +71,7 @@ int main() {
 	free(nv6.ptr);
 	printNodes();
 
+	printf("nv6 val :\t%s\n", nv6[0]);
 	nv6 = "Hello I'm nv6";
 	printf("nv6 val :\t%s\n", nv6[0]);
 	printNodes();
