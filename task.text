@@ -1,6 +1,0 @@
-ondemand
-append
-page concept (page size => 4K)
-address no change
-malloc => new
-free => delete

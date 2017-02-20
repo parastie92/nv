@@ -11,8 +11,9 @@
 linkedList *list;
 
 void create_node(linkedList *L) {
-	node *newNode = (node *)__real_malloc(sizeof(node)); 
+	node *newNode = (node *)malloc(sizeof(node)); 
 	newNode->next = NULL;
+	newNode->real_data_next = NULL;
 
 	if(L->head == NULL && L->tail == NULL) 
 		L->head = L->tail = newNode;	
@@ -57,7 +58,7 @@ void printNodes() {
 }
 
 void nv_init(void) {
-	list = (linkedList*)__real_malloc(sizeof(linkedList));
+	list = (linkedList*)malloc(sizeof(linkedList));
 	list->cur = NULL;
 	list->head = NULL;
 	list->tail = NULL;
@@ -76,7 +77,7 @@ extern "C" void *__wrap_malloc(size_t size) {
 
 // 16 : real_malloc meta size
 // 32 : node meta size
-	nv_ptr = (char*)__real_malloc(size-32-16);
+	nv_ptr = (char*)malloc(size-32-16);
 	
 	list->cur->data.location = nv_ptr;
 	list->cur->data.cnt = _cnt;
