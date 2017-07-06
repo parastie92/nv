@@ -14,7 +14,6 @@ int main() {
 
 //  Nvdimm template
 //	Nvdimm<char> *nv0 = new Nvdimm<char>[10];
-	
 //	Nvdimm<int> nv0;
 //	printf("nv0 : \t%d\n", nv0[0]);
 
